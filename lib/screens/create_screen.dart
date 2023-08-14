@@ -23,6 +23,8 @@ class _CreateScreenState extends State<CreateScreen> {
 
   final localDb = LocalDBService();
   ColorOptions? selectedOption;
+  Color? bgColor;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,19 @@ class _CreateScreenState extends State<CreateScreen> {
     if (widget.note != null) {
       _tController.text = widget.note!.title;
       _dController.text = widget.note!.desc;
+      if (widget.note!.color == "Red") {
+        bgColor = const Color.fromARGB(255, 248, 100, 100);
+      } else if (widget.note!.color == "Blue") {
+        bgColor = const Color.fromARGB(255, 119, 203, 244);
+      } else if (widget.note!.color == "Green") {
+        bgColor = Colors.green[200];
+      } else if (widget.note!.color == "Yellow") {
+        bgColor = const Color.fromARGB(243, 248, 231, 78);
+      } else if (widget.note!.color == "White") {
+        bgColor = const Color.fromARGB(240, 255, 255, 255);
+      } else {
+        bgColor = const Color.fromARGB(240, 255, 255, 255);
+      }
     }
   }
 
@@ -88,7 +103,7 @@ class _CreateScreenState extends State<CreateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: bgColor,
       body: SingleChildScrollView(
         child: SafeArea(
           child: SizedBox(
@@ -164,6 +179,23 @@ class _CreateScreenState extends State<CreateScreen> {
                         onSelected: (ColorOptions item) {
                           setState(() {
                             selectedOption = item;
+                            if (selectedOption == ColorOptions.red) {
+                              bgColor =
+                                  const Color.fromARGB(255, 248, 100, 100);
+                            } else if (selectedOption == ColorOptions.blue) {
+                              bgColor =
+                                  const Color.fromARGB(255, 119, 203, 244);
+                            } else if (selectedOption == ColorOptions.green) {
+                              bgColor = Colors.green[200];
+                            } else if (selectedOption == ColorOptions.yellow) {
+                              bgColor = const Color.fromARGB(243, 248, 231, 78);
+                            } else if (selectedOption == ColorOptions.white) {
+                              bgColor =
+                                  const Color.fromARGB(240, 255, 255, 255);
+                            } else {
+                              bgColor =
+                                  const Color.fromARGB(240, 255, 255, 255);
+                            }
                           });
                         },
                         itemBuilder: (BuildContext context) =>
